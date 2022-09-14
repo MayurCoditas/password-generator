@@ -21,7 +21,6 @@ export const PasswordProvider = ({
   children: React.ReactNode[];
 }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  console.log(state);
   return (
     <PasswordContext.Provider
       value={{

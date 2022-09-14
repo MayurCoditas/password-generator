@@ -1,16 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./inputBox.scss";
 import { Actions } from "contexts/actions";
 import { PasswordContext } from "contexts/PasswordContext";
 import { randomizer } from "./utils";
+import RangeInput from "components/rangeInput/rangeInput";
+import CheckBoxInput from "components/checkBoxInput/checkBoxInput";
+import PasswordStrength from "components/passwordStrength/passwordStrength";
 
 const InputBox: React.FC = () => {
   const { dispatch, length, lowerCase, upperCase, numbers, symbols } =
     useContext(PasswordContext);
-
-  const handleCheckBoxChange: React.ChangeEventHandler = (
+  const [strength, setStrength] = useState(0);
+  const handleInputChange: React.ChangeEventHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    if (event.target.checked && strength < 4) {
+      setStrength(strength + 1);
+    } else if (event.target.name !== Actions.setLength && strength > 0) {
+      setStrength(strength - 1);
+    }
+
     switch (event.target.name) {
       case Actions.setLowerCase:
         dispatch({ type: Actions.setLowerCase, payload: event.target.checked });
@@ -33,71 +42,55 @@ const InputBox: React.FC = () => {
     }
   };
 
-  const handleClick = () => {
-    const password = randomizer(length, lowerCase, upperCase, numbers, symbols);
+  const handleClick: React.MouseEventHandler = () => {
+    let password: string = randomizer(
+      length,
+      lowerCase,
+      upperCase,
+      numbers,
+      symbols
+    );
     dispatch({ type: Actions.setPassword, payload: password });
   };
 
   return (
     <div className="bottom-container">
       <div className="inputs-container">
-        <div className="range-container">
-          <div className="range-label-container">
-            <label>Character Length</label>
-            <label className="length-value">{length}</label>
-          </div>
-          <input
-            type="range"
-            min={8}
-            max={20}
-            step={1}
-            defaultValue={8}
-            name={Actions.setLength}
-            onChange={handleCheckBoxChange}
+        <RangeInput
+          length={length}
+          name={Actions.setLength}
+          handleInputChange={handleInputChange}
+        />
+        <div className="checkboxes-container">
+          <CheckBoxInput
+            name={Actions.setLowerCase}
+            handleInputChange={handleInputChange}
+            labelName="Include Lowercase Letters"
+          />
+          <CheckBoxInput
+            name={Actions.setUpperCase}
+            handleInputChange={handleInputChange}
+            labelName="Include Uppercase Letters"
+          />
+          <CheckBoxInput
+            name={Actions.setNumbers}
+            handleInputChange={handleInputChange}
+            labelName="Include Numbers"
+          />
+          <CheckBoxInput
+            name={Actions.setSymbols}
+            handleInputChange={handleInputChange}
+            labelName="Include Symbols"
           />
         </div>
-        <div className="checkboxes-container">
-          <div className="checkbox-container">
-            <span>
-              <input
-                type="checkBox"
-                name={Actions.setLowerCase}
-                onChange={handleCheckBoxChange}
-              />
-            </span>
-            <label>Include LowerCase Letters</label>
-          </div>
-          <div className="checkbox-container">
-            <input
-              type="checkBox"
-              name={Actions.setUpperCase}
-              onChange={handleCheckBoxChange}
-            />
-            <label>Include UpperCase Letters</label>
-          </div>
-          <div className="checkbox-container">
-            <input
-              type="checkBox"
-              name={Actions.setNumbers}
-              onChange={handleCheckBoxChange}
-            />
-            <label>Include Numbers</label>
-          </div>
-          <div className="checkbox-container">
-            <input
-              type="checkBox"
-              name={Actions.setSymbols}
-              onChange={handleCheckBoxChange}
-            />
-            <label>Include Symbols</label>
-          </div>
+        <div className="strength-container">
+          <PasswordStrength strength={strength} />
         </div>
-      </div>
-      <div className="strength-container">
-        <p>strength</p>
-      </div>
-      <div className="button-container">
-        <button onClick={handleClick}>Generate</button>
+        <div className="button-container">
+          <button onClick={handleClick} disabled={strength === 0}>
+            Generate
+          </button>
+        </div>
       </div>
     </div>
   );

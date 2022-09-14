@@ -1,6 +1,6 @@
 .output-container{
     align-items: center;
-   min-height: 32px;
+   min-height: 48px;
     width: 30%;
     background-color: rgb(32, 32, 32);
     margin-bottom: 24px;
@@ -13,5 +13,20 @@
         margin-left: auto;
         margin-right: 16px;
         height: 24px;
+        background-color: rgb(32, 32, 32); 
+        border: none;
+    }
+    button:disabled{
+        svg{
+            fill: gray;
+        }
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    svg{
+        height: 16px;
+        width: 16px;
+        fill: rgba(44, 172, 71, 0.938); ;
     }
 }

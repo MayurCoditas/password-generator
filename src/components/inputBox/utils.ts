@@ -1,3 +1,4 @@
+import _ from "lodash";
 export const randomizer = (
   length: number,
   lowerCase: boolean,
@@ -81,7 +82,7 @@ export const randomizer = (
     "]",
     "~",
   ];
-  const arr = [];
+  let arr = [];
   let mix: string[] = [];
   if (lowerCase) {
     arr.push(randomSelector(lowerCaseLetters));
@@ -107,6 +108,7 @@ export const randomizer = (
     arr.push(randomSelector(mix));
     length--;
   }
+  arr = _.shuffle(arr);
   return arr.join("");
 };
 

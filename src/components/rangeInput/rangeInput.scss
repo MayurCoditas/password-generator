@@ -1,0 +1,31 @@
+.range-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .range-label-container{
+        display: flex;
+        margin: 8px;
+        align-items: center;
+        width: 100%;
+
+        label{
+            padding-left:16px;
+            padding-right: 16px;
+        }
+        .length-value{
+            color: rgba(44, 172, 71, 0.938);
+            font-size: 24px;
+            margin-left: auto;
+        }
+    }
+
+    input{
+        width: 90%;
+        border-radius: 0px;
+        accent-color: white;
+        margin: 8px;
+    }
+}
