@@ -1,0 +1,13 @@
+.page-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    font-family: 'Source Code Pro';
+
+    .heading-container{
+        margin-top: 100px;
+    }
+}

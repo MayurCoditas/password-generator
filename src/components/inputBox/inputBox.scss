@@ -1,0 +1,84 @@
+
+
+.bottom-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    background-color: rgb(32, 32, 32);
+
+    .inputs-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        .checkboxes-container{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            
+
+            .checkbox-container{
+               margin-left: 32px;
+               margin: 8px;
+
+               input[type=checkbox] {
+                accent-color: rgba(44, 172, 71, 0.938);
+                outline: 1px solid white;
+                
+              }
+              
+
+               label{
+                margin-left: 16px;
+               }
+            }
+            
+        }
+
+        .range-container{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .range-label-container{
+                display: flex;
+                gap: 225px;
+                margin: 8px;
+                align-items: center;
+                .length-value{
+                    color: rgba(44, 172, 71, 0.938);
+                    font-size: 24px;
+                }
+            }
+
+            input{
+                width: 90%;
+                border-radius: 0px;
+                accent-color: white;
+                margin: 8px;
+            }
+        }
+
+        
+    }
+
+    .button-container{
+    
+        button{
+            height: 50px;
+            width: 400px;
+            border-radius: 4px;
+            background-color: rgba(44, 172, 71, 0.938);
+            color: black;
+            margin: 16px;
+        }
+    }
+}
+
+
